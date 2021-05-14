@@ -35,14 +35,23 @@ function evalButNotCompletelyStupid(str) {
     return new Function(str)();
 }
 
-const extensions = {
-    ".cpp": {
-        jsStart: "/*js",
-        jsEnd: "*/",
-        outStart: "//JS_OUT",
-        outEnd: "//END_JS_OUT"
-    }
-};
+function getParsedConfig() {
+    let config = require(path.join(__dirname, "./config.json"));
+
+    let result = {};
+
+    Object.keys(config).forEach(key => {
+        let keyWithoutWhitespace = key.replace(/ /g, "");
+        let splitKey = keyWithoutWhitespace.split("|");
+        splitKey.forEach(key2 => {
+            result[key2] = config[key];
+        });
+    });
+
+    return result;
+}
+
+const extensions = getParsedConfig();
 
 const regexpSafeExtensions = JSON.parse(JSON.stringify(extensions));
 

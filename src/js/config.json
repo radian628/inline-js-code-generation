@@ -1,0 +1,8 @@
+{
+    ".cpp | .c | .js | .java": {
+        "jsStart": "/*js",
+        "jsEnd": "*/",
+        "outStart": "//JS_OUT",
+        "outEnd": "//END_JS_OUT"
+    }
+}
